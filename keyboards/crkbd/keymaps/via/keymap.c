@@ -175,3 +175,82 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   return true;
 }
 #endif // OLED_ENABLE
+
+
+#ifdef COMBO_ENABLE
+
+enum combo_events {
+  ROUND_BRC,
+  CURLY_BRC,
+  SQUARE_BRC,
+  ANGLE_BRC,
+  SINGLE_QUOTE,
+  DOUBLE_QUOTE,
+  COMBO_LENGTH
+};
+uint16_t COMBO_LEN = COMBO_LENGTH; // remove the COMBO_COUNT define and use this instead!
+
+const uint16_t PROGMEM round_brc_combo[]  = {KC_J, KC_K, COMBO_END}; // jk
+const uint16_t PROGMEM curly_brc_combo[]  = {KC_J, KC_L, COMBO_END}; // jl
+const uint16_t PROGMEM square_brc_combo[] = {KC_U, KC_I, COMBO_END}; // ui
+const uint16_t PROGMEM angle_brc_combo[]  = {KC_U, KC_O, COMBO_END}; // uo
+const uint16_t PROGMEM single_quote_combo[]  = {KC_COMM, KC_M, COMBO_END}; // m,
+const uint16_t PROGMEM double_quote_combo[]  = {KC_DOT,  KC_M, COMBO_END}; // m.
+
+
+combo_t key_combos[] = {
+  [ROUND_BRC]  = COMBO_ACTION(round_brc_combo),
+  [CURLY_BRC]  = COMBO_ACTION(curly_brc_combo),
+  [SQUARE_BRC] = COMBO_ACTION(square_brc_combo),
+  [ANGLE_BRC]  = COMBO_ACTION(angle_brc_combo),
+  [SINGLE_QUOTE] = COMBO_ACTION(single_quote_combo),
+  [DOUBLE_QUOTE] = COMBO_ACTION(double_quote_combo)
+};
+
+void process_combo_event(uint16_t combo_index, bool pressed) {
+    switch(combo_index) {
+    case ROUND_BRC:
+	if (pressed) {
+	    tap_code16(S(KC_9));
+	    tap_code16(S(KC_0));
+	    tap_code16(KC_LEFT);
+	}
+	break;
+    case CURLY_BRC:
+	if (pressed) {
+	    tap_code16(S(KC_LBRC));
+	    tap_code16(S(KC_RBRC));
+	    tap_code16(KC_LEFT);
+	}
+	break;
+    case SQUARE_BRC:
+	if (pressed) {
+	    tap_code16(KC_LBRC);
+	    tap_code16(KC_RBRC);
+	    tap_code16(KC_LEFT);
+	}
+	break;
+    case ANGLE_BRC:
+	if (pressed) {
+	    tap_code16(S(KC_COMM));
+	    tap_code16(S(KC_DOT));
+	    tap_code16(KC_LEFT);
+	}
+	break;
+    case SINGLE_QUOTE:
+	if (pressed) {
+	    tap_code16(KC_QUOT);
+	    tap_code16(KC_QUOT);
+	    tap_code16(KC_LEFT);
+	}
+	break;
+    case DOUBLE_QUOTE:
+	if (pressed) {
+	    tap_code16(S(KC_QUOT));
+	    tap_code16(S(KC_QUOT));
+	    tap_code16(KC_LEFT);
+	}
+	break;
+    }
+}
+#endif
