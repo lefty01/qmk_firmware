@@ -445,7 +445,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   case MACRO_15:
       if (record->event.pressed) {
 	  // when keycode MACRO_15 is pressed
-	  SEND_STRING("Macro 15 Key was pressed!");
+	  SEND_STRING("#Macro 15: QMK Firmware 0.18.6");
       } else {
 	  // when keycode MACRO0 is released
       }
