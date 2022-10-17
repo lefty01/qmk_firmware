@@ -54,6 +54,27 @@ enum layer_names {
 };
 
 
+// TEMPLATE
+//  ,-----------------------------------------------------.                    ,-----------------------------------------------------.
+//  |        |        |        |        |        |        |                    |        |        |        |        |        |        |
+//  |--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+//  |        |        |        |        |        |        |                    |        |        |        |        |        |        |
+//  |--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+//  |        |        |        |        |        |        |                    |        |        |        |        |        |        |
+//  `--------+--------+--------+--------+--------+--------+--------.  .--------+--------+--------+--------+--------+--------+--------'
+//                                      |        |        |        |  |        |        |        |
+//                                      `--------------------------'  `--------------------------'
+// ,-----------------------------------------------------------------------.       ,-----------------------------------------------------------------------.
+// |           |           |           |           |           |           |       |           |           |           |           |           |           |
+// |-----------+-----------+-----------+-----------+-----------+-----------|       |-----------+-----------+-----------+-----------+-----------+-----------|
+// |           |           |           |           |           |           |       |           |           |           |           |           |           |
+// |-----------+-----------+-----------+-----------+-----------+-----------|       |-----------+-----------+-----------+-----------+-----------+-----------|
+// |           |           |           |           |           |           |       |           |           |           |           |           |           |
+// `-----------+-----------+-----------+--+--------+--+--------+--+--------+--. .-----------+--+--------+--+--------+--+-----------+-----------+-----------'
+//                                        |           |           |           | |           |           |           |
+//                                        `-----------------------------------' `-----------------------------------'
+
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_QWERTY] = LAYOUT_split_3x6_3(
@@ -97,6 +118,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                      //`--------------------------'  `--------------------------'
     ),
 
+// ,-----------------------------------------------------------------------.       ,-----------------------------------------------------------------------.
+// |           |           |           |           |           |           |       |           |           |           |           |           |           |
+// |-----------+-----------+-----------+-----------+-----------+-----------|       |-----------+-----------+-----------+-----------+-----------+-----------|
+// |           |           |           |           |           |           |       |           |           |           |           |           |           |
+// |-----------+-----------+-----------+-----------+-----------+-----------|       |-----------+-----------+-----------+-----------+-----------+-----------|
+// |           |           |           |           |           |           |       |           |           |           |           |           |           |
+// `-----------+-----------+-----------+--+--------+--+--------+--+--------+--. .-----------+--+--------+--+--------+--+-----------+-----------+-----------'
+//                                        |           |           |           | |           |           |           |
+//                                        `-----------------------------------' `-----------------------------------'
     [_ADJUST] = LAYOUT_split_3x6_3(
 	RESET,   MACRO_3, MACRO_4, MACRO_5, MACRO_6, MACRO_7,                 KC_CAPS, KC_PSCR, KC_SLCK, KC_PAUS, KC_BRIU, KC_BRID,
 	RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, RGB_SPI, KC_VOLU,                 MACRO_9,   MACRO_10, MACRO_11, MACRO_12, MACRO_13, MACRO_14,
@@ -117,6 +147,9 @@ enum combo_events {
     ANGLE_BRC,
     SINGLE_QUOTE,
     DOUBLE_QUOTE,
+    A_UML,
+    O_UML,
+    U_UML,
     COMBO_LENGTH
 };
 uint16_t COMBO_LEN = COMBO_LENGTH;
@@ -127,6 +160,9 @@ const uint16_t PROGMEM square_brc_combo[]    = {KC_U, KC_I, COMBO_END};    // ui
 const uint16_t PROGMEM angle_brc_combo[]     = {KC_U, KC_O, COMBO_END};    // uo
 const uint16_t PROGMEM single_quote_combo[]  = {KC_COMM, KC_M, COMBO_END}; // m,
 const uint16_t PROGMEM double_quote_combo[]  = {KC_DOT,  KC_M, COMBO_END}; // m.
+const uint16_t PROGMEM a_uml_combo[]  = {KC_A, KC_J, COMBO_END}; // ja
+const uint16_t PROGMEM o_uml_combo[]  = {KC_F, KC_O, COMBO_END}; // fo
+const uint16_t PROGMEM u_uml_combo[]  = {KC_F, KC_U, COMBO_END}; // uf
 
 
 combo_t key_combos[] = {
@@ -135,7 +171,10 @@ combo_t key_combos[] = {
     [SQUARE_BRC]   = COMBO_ACTION(square_brc_combo),
     [ANGLE_BRC]    = COMBO_ACTION(angle_brc_combo),
     [SINGLE_QUOTE] = COMBO_ACTION(single_quote_combo),
-    [DOUBLE_QUOTE] = COMBO_ACTION(double_quote_combo)
+    [DOUBLE_QUOTE] = COMBO_ACTION(double_quote_combo),
+    [A_UML]        = COMBO_ACTION(a_uml_combo),
+    [O_UML]        = COMBO_ACTION(o_uml_combo),
+    [U_UML]        = COMBO_ACTION(u_uml_combo)
 };
 
 void process_combo_event(uint16_t combo_index, bool pressed) {
@@ -180,6 +219,27 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
 	    tap_code16(S(KC_QUOT));
 	    tap_code16(S(KC_QUOT));
 	    tap_code16(KC_LEFT);
+	}
+	break;
+    case A_UML:
+	if (pressed) {
+	    tap_code16(KC_RGUI);
+	    tap_code16(S(KC_QUOT));
+	    tap_code16(KC_A);
+	}
+	break;
+    case O_UML:
+	if (pressed) {
+	    tap_code16(KC_RGUI);
+	    tap_code16(S(KC_QUOT));
+	    tap_code16(KC_O);
+	}
+	break;
+    case U_UML:
+	if (pressed) {
+	    tap_code16(KC_RGUI);
+	    tap_code16(S(KC_QUOT));
+	    tap_code16(KC_U);
 	}
 	break;
     }
