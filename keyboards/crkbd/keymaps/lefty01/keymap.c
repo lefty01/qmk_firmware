@@ -111,7 +111,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [_RAISE] = LAYOUT_split_3x6_3(
-	KC_LALT, MACRO_0, MACRO_1, MACRO_2, KC_F11, KC_F12,                 KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_GRV,  KC_BSPC,
+	KC_LALT, QK_MACRO_0, QK_MACRO_1, QK_MACRO_2, KC_F11, KC_F12,                 KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_GRV,  KC_BSPC,
 	KC_TAB,  KC_F1,   KC_F2,   KC_F3,   KC_F4,  KC_F5,                  KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_SPC,  KC_RCTL,
 	KC_LSFT, KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,                 KC_TILD, KC_DEL,  KC_NO,   KC_NO,   KC_INS,  KC_RSFT,
                                         KC_LCTL, KC_TRNS, KC_SPC,     KC_ENT, KC_TRNS, KC_RALT
@@ -128,9 +128,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //                                        |           |           |           | |           |           |           |
 //                                        `-----------------------------------' `-----------------------------------'
     [_ADJUST] = LAYOUT_split_3x6_3(
-	RESET,   MACRO_3, MACRO_4, MACRO_5, MACRO_6, MACRO_7,                 KC_CAPS, KC_PSCR, KC_SLCK, KC_PAUS, KC_BRIU, KC_BRID,
-	RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, RGB_SPI, KC_VOLU,                 MACRO_9,   MACRO_10, MACRO_11, MACRO_12, MACRO_13, MACRO_14,
-	RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD, RGB_SPD, KC_VOLD,                 KC_RGUI, KC_NLCK, KC_NO,   KC_NO,   KC_NO,   MACRO_15,
+	QK_HAPTIC_RESET,   QK_MACRO_3, QK_MACRO_4, QK_MACRO_5, QK_MACRO_6, QK_MACRO_7,                 KC_CAPS, KC_PSCR, KC_SCROLL_LOCK, KC_PAUS, KC_BRIU, KC_BRID,
+	RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, RGB_SPI, KC_VOLU,                 QK_MACRO_9,   QK_MACRO_10, QK_MACRO_11, QK_MACRO_12, QK_MACRO_13, QK_MACRO_14,
+	RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD, RGB_SPD, KC_VOLD,                 KC_RGUI, KC_NUM_LOCK, KC_NO,   KC_NO,   KC_NO,   QK_MACRO_15,
                                         KC_LCTL, KC_TRNS, KC_SPC,    KC_ENT, KC_TRNS, KC_RALT
                                      //`--------------------------'  `--------------------------'
     )
@@ -360,14 +360,14 @@ void rgb_matrix_layer_helper(uint8_t hue, uint8_t sat, uint8_t val, uint8_t led_
     }
 
     RGB rgb = hsv_to_rgb(hsv);
-    for (uint8_t i = 0; i < DRIVER_LED_TOTAL; i++) {
+    for (uint8_t i = 0; i < RGB_MATRIX_LED_COUNT; i++) {
 	if (HAS_FLAGS(g_led_config.flags[i], led_type)) {
 	    rgb_matrix_set_color(i, rgb.r, rgb.g, rgb.b);
 	}
     }
 }
 
-void rgb_matrix_indicators_user(void) {
+bool rgb_matrix_indicators_user(void) {
     if (host_keyboard_led_state().caps_lock) {
 	rgb_matrix_set_color(26, 255, 0, 0);
 	// Only works with SPLIT_LED_STATE_ENABLE
@@ -389,6 +389,7 @@ void rgb_matrix_indicators_user(void) {
 	break;
     }
     }
+    return false;
 }
 
 
@@ -427,85 +428,85 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       break;
 
 
-  case MACRO_0:
+  case QK_MACRO_0:
       if (record->event.pressed) {
 	  SEND_STRING(SS_LALT("x") "set-variable" SS_TAP(X_ENT) "c-basic-offset" SS_TAP(X_ENT) "2");
       }
       break;
-  case MACRO_1:
+  case QK_MACRO_1:
       if (record->event.pressed) {
 	  SEND_STRING("emacs *.trace.gz &" SS_TAP(X_ENT));
       }
       break;
-  case MACRO_2:
+  case QK_MACRO_2:
       if (record->event.pressed) {
 	  SEND_STRING(SS_TAP(X_ESC) ":wq" SS_TAP(X_ENT));
       }
       break;
-  case MACRO_3:
+  case QK_MACRO_3:
       if (record->event.pressed) {
 	  SEND_STRING(SS_LCTL("c") "r");
       }
       break;
-  case MACRO_4:
+  case QK_MACRO_4:
       if (record->event.pressed) {
 	  SEND_STRING(SS_RALT("x") "find-grep-dired" SS_TAP(X_ENT));
       }
       break;
-  case MACRO_5:
+  case QK_MACRO_5:
       if (record->event.pressed) {
 	  SEND_STRING(SS_RALT("x") "comment-region" SS_TAP(X_ENT));
       }
       break;
-  case MACRO_6:
+  case QK_MACRO_6:
       if (record->event.pressed) {
 	  SEND_STRING("Macro 06 Key was pressed!");
       }
       break;
-  case MACRO_7:
+  case QK_MACRO_7:
       if (record->event.pressed) {
 	  SEND_STRING("Macro 07 Key was pressed!");
       }
       break;
-  case MACRO_8:
+  case QK_MACRO_8:
       if (record->event.pressed) {
 	  SEND_STRING("Macro 08 Key was pressed!");
       }
       break;
-  case MACRO_9: // ctrl-space + end: mark from cursor to end of line in emacs
+  case QK_MACRO_9: // ctrl-space + end: mark from cursor to end of line in emacs
       if (record->event.pressed) {
 	  SEND_STRING(SS_LCTL(" ") SS_TAP(X_END));
       }
       break;
-  case MACRO_10:
+  case QK_MACRO_10:
       if (record->event.pressed) {
 	  SEND_STRING(SS_LCTL("x") "rt");
       }
       break;
-  case MACRO_11:
+  case QK_MACRO_11:
       if (record->event.pressed) {
 	  SEND_STRING(SS_LCTL("x") "rk");
       }
       break;
-  case MACRO_12:
+  case QK_MACRO_12:
       if (record->event.pressed) {
 	  SEND_STRING(SS_LCTL("x") "ry");
       }
       break;
-  case MACRO_13:
+  case QK_MACRO_13:
       if (record->event.pressed) {
 	  SEND_STRING("Macro 13 Key was pressed!");
       }
       break;
-  case MACRO_14:
+  case QK_MACRO_14:
       if (record->event.pressed) {
 	  SEND_STRING("Macro 14 Key was pressed!");
       }
       break;
-  case MACRO_15:
+  case QK_MACRO_15:
       if (record->event.pressed) {
-	  // when keycode MACRO_15 is pressed
-	  SEND_STRING("#Macro 15: QMK Firmware 0.18.6");
+	  // when keycode QK_MACRO_15 is pressed
+	  SEND_STRING("#Macro 15: QMK Firmware 0.16.12");
       } else {
 	  // when keycode MACRO0 is released
       }
