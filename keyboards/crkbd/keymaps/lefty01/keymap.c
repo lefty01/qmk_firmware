@@ -38,6 +38,7 @@ enum custom_keycodes {
     LAYER1,
     LAYER2,
     LAYER3,
+    LAYER4,
 
     FN_MO13,
     FN_MO23,
@@ -53,17 +54,48 @@ enum layer_names {
     _ADJUST
 };
 
+#ifdef TAP_DANCE_ENABLE
+enum {
+    TD_ESC_CAPS,
+};
+
+// Tap Dance definitions
+tap_dance_action_t tap_dance_actions[] = {
+    // Tap once for Escape, twice for Caps Lock
+    [TD_ESC_CAPS] = ACTION_TAP_DANCE_DOUBLE(KC_ESC, KC_CAPS),
+};
+
+// Add tap dance item to your keymap in place of a keycode
+/* const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = { */
+/*     // ... */
+/*     TD(TD_ESC_CAPS) */
+/*     // ... */
+/* }; */
+
+#define KC_TD_ESC_CAPS TD(TD_ESC_CAPS)
+#else
+#define KC_TD_ESC_CAPS KC_NO
+#endif // TAP_DANCE_ENABLE
+
+// D, F, J, K
+/* #define KC_CTL_D LCTL_T(KC_D) */
+/* #define KC_ALT_F LALT_T(KC_F) */
+/* #define KC_ALT_J RALT_T(KC_J) */
+/* #define KC_CTL_K RCTL_T(KC_K) */
+
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+    case LCTL_T(KC_D):
+    case LALT_T(KC_F):
+    case RALT_T(KC_J):
+    case RCTL_T(KC_K):
+	return TAPPING_TERM + 250;
+    default:
+	return TAPPING_TERM;
+    }
+}
 
 // TEMPLATE
-//  ,-----------------------------------------------------.                    ,-----------------------------------------------------.
-//  |        |        |        |        |        |        |                    |        |        |        |        |        |        |
-//  |--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-//  |        |        |        |        |        |        |                    |        |        |        |        |        |        |
-//  |--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-//  |        |        |        |        |        |        |                    |        |        |        |        |        |        |
-//  `--------+--------+--------+--------+--------+--------+--------.  .--------+--------+--------+--------+--------+--------+--------'
-//                                      |        |        |        |  |        |        |        |
-//                                      `--------------------------'  `--------------------------'
 // ,-----------------------------------------------------------------------.       ,-----------------------------------------------------------------------.
 // |           |           |           |           |           |           |       |           |           |           |           |           |           |
 // |-----------+-----------+-----------+-----------+-----------+-----------|       |-----------+-----------+-----------+-----------+-----------+-----------|
@@ -78,12 +110,12 @@ enum layer_names {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_QWERTY] = LAYOUT_split_3x6_3(
-	//,-----------------------------------------------------.                    ,-----------------------------------------------------.
-	KC_ESC,     KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,  KC_BSPC,
+    //,-----------------------------------------------------.                        ,-----------------------------------------------------.
+       KC_TD_ESC_CAPS,KC_Q,  KC_W,    KC_E,    KC_R,     KC_T,                         KC_Y,   KC_U,    KC_I,    KC_O,    KC_P,   KC_BSPC,
 	//|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-	KC_TAB,     KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                         KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN, KC_QUOT,
+	KC_TAB,     KC_A,    KC_S,   KC_D,     KC_F,     KC_G,                         KC_H,  KC_J,     KC_K,    KC_L,    KC_SCLN, KC_QUOT,
 	//|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-	KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, KC_RSFT,
+	KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,     KC_B,                         KC_N,   KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
 	//|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                     KC_LCTL, LT(_LOWER, KC_ENT),  KC_SPC,     KC_ENT, FN_MO23, KC_RALT
 	//                         `-------------------------------------'   `------------------------'
@@ -102,37 +134,42 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [_LOWER] = LAYOUT_split_3x6_3(
-	KC_LALT, KC_LCBR, KC_7, KC_8, KC_9, KC_RCBR,                          KC_CIRC, KC_AMPR, KC_ASTR, KC_PLUS, KC_EQL,   KC_BSPC,
-	KC_TAB,  KC_LBRC, KC_4, KC_5, KC_6, KC_RBRC,                          KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,  KC_RCTL,
-	KC_LSFT, KC_0,    KC_1, KC_2, KC_3, KC_PIPE,                          KC_UNDS, KC_MINS, KC_LPRN, KC_RPRN, KC_BSLS,  KC_RSFT,
-                                   KC_LCTL, KC_TRNS, KC_SPC,        KC_ENT, KC_TRNS, KC_RALT
-                                //`--------------------------'    `--------------------------'
+// ,-----------------------------------------------------------------------.       ,-----------------------------------------------------------------------.
+      KC_LALT,   KC_LCBR,    KC_7,       KC_8,       KC_9,       KC_RCBR,            KC_CIRC,    KC_AMPR,    KC_ASTR,    KC_PLUS,    KC_EQL,     KC_BSPC,
+// |-----------+-----------+-----------+-----------+-----------+-----------|       |-----------+-----------+-----------+-----------+-----------+-----------|
+      KC_TAB,    KC_LBRC,    KC_4,       KC_5,       KC_6,       KC_RBRC,            KC_EXLM,    KC_AT,      KC_HASH,    KC_DLR,     KC_PERC,    KC_RCTL,
+// |-----------+-----------+-----------+-----------+-----------+-----------|       |-----------+-----------+-----------+-----------+-----------+-----------|
+      KC_LSFT,   KC_0,       KC_1,       KC_2,       KC_3,       KC_PIPE,            KC_UNDS,    KC_MINS,    KC_LPRN,    KC_RPRN,    KC_BSLS,    KC_RSFT,
+// `-----------+-----------+-----------+--+--------+--+--------+--+--------+--. .-----------+--+--------+--+--------+--+-----------+-----------+-----------'
+                                             KC_LCTL,   KC_TRNS,    KC_SPC,        KC_ENT,    KC_TRNS,    KC_RALT
+//                                        `-----------+-----------+-----------' `-----------+-----------+-----------'
 
     ),
 
     [_RAISE] = LAYOUT_split_3x6_3(
-	KC_LALT, QK_MACRO_0, QK_MACRO_1, QK_MACRO_2, KC_F11, KC_F12,                 KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_GRV,  KC_BSPC,
-	KC_TAB,  KC_F1,   KC_F2,   KC_F3,   KC_F4,  KC_F5,                  KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_SPC,  KC_RCTL,
-	KC_LSFT, KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,                 KC_TILD, KC_DEL,  KC_NO,   KC_NO,   KC_INS,  KC_RSFT,
-                                        KC_LCTL, KC_TRNS, KC_SPC,     KC_ENT, KC_TRNS, KC_RALT
-                                     //`--------------------------'  `--------------------------'
+// ,-----------------------------------------------------------------------.       ,-----------------------------------------------------------------------.
+      KC_LALT,  QK_MACRO_0, QK_MACRO_1, QK_MACRO_2,  KC_F11,     KC_F12,             KC_PGUP,    KC_HOME,    KC_UP,      KC_END,     KC_GRV,     KC_BSPC,
+// |-----------+-----------+-----------+-----------+-----------+-----------|       |-----------+-----------+-----------+-----------+-----------+-----------|
+      KC_TAB,    KC_F1,      KC_F2,      KC_F3,      KC_F4,      KC_F5,              KC_PGDN,    KC_LEFT,    KC_DOWN,    KC_RGHT,    KC_SPC,     KC_RCTL,
+// |-----------+-----------+-----------+-----------+-----------+-----------|       |-----------+-----------+-----------+-----------+-----------+-----------|
+      KC_LSFT,   KC_F6,      KC_F7,      KC_F8,      KC_F9,      KC_F10,             KC_TILD,    KC_DEL,     KC_NO,      KC_NO,      KC_INS,     KC_RSFT,
+// `-----------+-----------+-----------+--+--------+--+--------+--+--------+--. .-----------+--+--------+--+--------+--+-----------+-----------+-----------'
+                                             KC_LCTL,   KC_TRNS,    KC_SPC,        KC_ENT,    KC_TRNS,    KC_RALT
+//                                        `-----------+-----------+-----------' `-----------+-----------+-----------'
+
     ),
 
-// ,-----------------------------------------------------------------------.       ,-----------------------------------------------------------------------.
-// |           |           |           |           |           |           |       |           |           |           |           |           |           |
-// |-----------+-----------+-----------+-----------+-----------+-----------|       |-----------+-----------+-----------+-----------+-----------+-----------|
-// |           |           |           |           |           |           |       |           |           |           |           |           |           |
-// |-----------+-----------+-----------+-----------+-----------+-----------|       |-----------+-----------+-----------+-----------+-----------+-----------|
-// |           |           |           |           |           |           |       |           |           |           |           |           |           |
-// `-----------+-----------+-----------+--+--------+--+--------+--+--------+--. .-----------+--+--------+--+--------+--+-----------+-----------+-----------'
-//                                        |           |           |           | |           |           |           |
-//                                        `-----------------------------------' `-----------------------------------'
     [_ADJUST] = LAYOUT_split_3x6_3(
-	QK_HAPTIC_RESET,   QK_MACRO_3, QK_MACRO_4, QK_MACRO_5, QK_MACRO_6, QK_MACRO_7,                 KC_CAPS, KC_PSCR, KC_SCROLL_LOCK, KC_PAUS, KC_BRIU, KC_BRID,
-	RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, RGB_SPI, KC_VOLU,                 QK_MACRO_9,   QK_MACRO_10, QK_MACRO_11, QK_MACRO_12, QK_MACRO_13, QK_MACRO_14,
-	RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD, RGB_SPD, KC_VOLD,                 KC_RGUI, KC_NUM_LOCK, KC_NO,   KC_NO,   KC_NO,   QK_MACRO_15,
-                                        KC_LCTL, KC_TRNS, KC_SPC,    KC_ENT, KC_TRNS, KC_RALT
-                                     //`--------------------------'  `--------------------------'
+// ,-----------------------------------------------------------------------.       ,-----------------------------------------------------------------------.
+QK_HAPTIC_RESET,QK_MACRO_3, QK_MACRO_4, QK_MACRO_5, QK_MACRO_6, QK_MACRO_7,          KC_CAPS,    KC_PSCR,KC_SCROLL_LOCK, KC_PAUS,    KC_BRIU,   KC_BRID,
+// |-----------+-----------+-----------+-----------+-----------+-----------|       |-----------+-----------+-----------+-----------+-----------+-----------|
+      RGB_TOG,   RGB_HUI,    RGB_SAI,    RGB_VAI,    RGB_SPI,    KC_VOLU,           QK_MACRO_9, QK_MACRO_10,QK_MACRO_11,QK_MACRO_12,QK_MACRO_13,QK_MACRO_14,
+// |-----------+-----------+-----------+-----------+-----------+-----------|       |-----------+-----------+-----------+-----------+-----------+-----------|
+      RGB_MOD,   RGB_HUD,    RGB_SAD,    RGB_VAD,    RGB_SPD,    KC_VOLD,            KC_RGUI,  KC_NUM_LOCK,  KC_NO,      KC_NO,     KC_NO ,     QK_MACRO_15,
+// `-----------+-----------+-----------+--+--------+--+--------+--+--------+--. .-----------+--+--------+--+--------+--+-----------+-----------+-----------'
+                                             KC_LCTL,   KC_TRNS,    KC_SPC,        KC_ENT,    KC_TRNS,    KC_RALT
+//                                        `-----------+-----------+-----------' `-----------+-----------+-----------'
+
     )
 };
 
@@ -385,6 +422,7 @@ bool rgb_matrix_indicators_user(void) {
 	rgb_matrix_layer_helper(HSV_GREEN, LED_FLAG_UNDERGLOW);
 	break;
     default: {
+	// fixme: handle additional base layer e.g. if we toggle between qwert and colemak
 	rgb_matrix_layer_helper(THEME_HSV, LED_FLAG_UNDERGLOW);
 	break;
     }
@@ -427,7 +465,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       // like fn_mo13 but use layer tap to get enter when tapped
       break;
 
-
+  // process macros
   case QK_MACRO_0:
       if (record->event.pressed) {
 	  SEND_STRING(SS_LALT("x") "set-variable" SS_TAP(X_ENT) "c-basic-offset" SS_TAP(X_ENT) "2");
@@ -506,7 +544,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   case QK_MACRO_15:
       if (record->event.pressed) {
 	  // when keycode QK_MACRO_15 is pressed
-	  SEND_STRING("#Macro 15: QMK Firmware 0.16.12");
+	  SEND_STRING("#Macro 15: QMK Firmware 0.20.0");
       } else {
 	  // when keycode MACRO0 is released
       }
