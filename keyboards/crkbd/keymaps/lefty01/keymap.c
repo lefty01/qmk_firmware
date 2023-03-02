@@ -1,7 +1,7 @@
 /*
 Copyright 2019 @foostan
 Copyright 2020 Drashna Jaelre <@drashna>
-Copyright 2022 Andreas Loeffker <al@exitzero.de>
+Copyright 2023 Andreas Loeffler <al@exitzero.de>
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -57,12 +57,16 @@ enum layer_names {
 #ifdef TAP_DANCE_ENABLE
 enum {
     TD_ESC_CAPS,
+    TD_LSFT_CAPS,
+    TD_RSFT_CAPS,
 };
 
 // Tap Dance definitions
 tap_dance_action_t tap_dance_actions[] = {
     // Tap once for Escape, twice for Caps Lock
-    [TD_ESC_CAPS] = ACTION_TAP_DANCE_DOUBLE(KC_ESC, KC_CAPS),
+    [TD_ESC_CAPS]  = ACTION_TAP_DANCE_DOUBLE(KC_ESC, KC_CAPS),
+    [TD_LSFT_CAPS] = ACTION_TAP_DANCE_DOUBLE(KC_LSFT, KC_CAPS),
+    [TD_RSFT_CAPS] = ACTION_TAP_DANCE_DOUBLE(KC_RSFT, KC_CAPS),
 };
 
 // Add tap dance item to your keymap in place of a keycode
@@ -73,8 +77,12 @@ tap_dance_action_t tap_dance_actions[] = {
 /* }; */
 
 #define KC_TD_ESC_CAPS TD(TD_ESC_CAPS)
+#define KC_TD_LSFT_CAPS TD(TD_LSFT_CAPS)
+#define KC_TD_RSFT_CAPS TD(TD_RSFT_CAPS)
 #else
 #define KC_TD_ESC_CAPS KC_NO
+#define KC_TD_LSFT_CAPS KC_LSFT
+#define KC_TD_RSFT_CAPS KC_RSFT
 #endif // TAP_DANCE_ENABLE
 
 // D, F, J, K
@@ -111,11 +119,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_QWERTY] = LAYOUT_split_3x6_3(
     //,-----------------------------------------------------.                        ,-----------------------------------------------------.
-       KC_TD_ESC_CAPS,KC_Q,  KC_W,    KC_E,    KC_R,     KC_T,                         KC_Y,   KC_U,    KC_I,    KC_O,    KC_P,   KC_BSPC,
+         KC_ESC,    KC_Q,  KC_W,    KC_E,    KC_R,     KC_T,                         KC_Y,   KC_U,    KC_I,    KC_O,    KC_P,   KC_BSPC,
 	//|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
 	KC_TAB,     KC_A,    KC_S,   KC_D,     KC_F,     KC_G,                         KC_H,  KC_J,     KC_K,    KC_L,    KC_SCLN, KC_QUOT,
 	//|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-	KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,     KC_B,                         KC_N,   KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
+KC_TD_LSFT_CAPS,    KC_Z,    KC_X,    KC_C,    KC_V,     KC_B,                         KC_N,   KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_TD_RSFT_CAPS,
 	//|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                     KC_LCTL, LT(_LOWER, KC_ENT),  KC_SPC,     KC_ENT, FN_MO23, KC_RALT
 	//                         `-------------------------------------'   `------------------------'
@@ -127,7 +135,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //|--------+--------+--------+--------+--------+--------|                        |--------+--------+--------+--------+--------+--------|
         KC_TAB,     KC_A,    KC_R,    KC_S,    KC_T,    KC_D,                         KC_H,    KC_N,    KC_E,    KC_I,    KC_O, KC_QUOT,
     //|--------+--------+--------+--------+--------+--------|                        |--------+--------+--------+--------+--------+--------|
-        KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_K,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,  KC_RSFT,
+KC_TD_LSFT_CAPS,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_K,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,    KC_TD_RSFT_CAPS,
     //|--------+--------+--------+--------+--------+--------|                        |--------+--------+--------+--------+--------+--------|
                                       KC_LCTL, LT(_LOWER, KC_ENT), KC_SPC,        KC_ENT, FN_MO23, KC_RALT
     //                                `-----------------------------------'       `--------------------------'
