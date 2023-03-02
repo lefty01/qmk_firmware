@@ -56,7 +56,7 @@ enum layer_names {
 
 #ifdef TAP_DANCE_ENABLE
 enum {
-    TD_ESC_CAPS,
+    TD_ESC_BSPC,
     TD_LSFT_CAPS,
     TD_RSFT_CAPS,
 };
@@ -64,7 +64,7 @@ enum {
 // Tap Dance definitions
 tap_dance_action_t tap_dance_actions[] = {
     // Tap once for Escape, twice for Caps Lock
-    [TD_ESC_CAPS]  = ACTION_TAP_DANCE_DOUBLE(KC_ESC, KC_CAPS),
+    [TD_ESC_BSPC]  = ACTION_TAP_DANCE_DOUBLE(KC_ESC,  KC_BSPC),
     [TD_LSFT_CAPS] = ACTION_TAP_DANCE_DOUBLE(KC_LSFT, KC_CAPS),
     [TD_RSFT_CAPS] = ACTION_TAP_DANCE_DOUBLE(KC_RSFT, KC_CAPS),
 };
@@ -76,11 +76,11 @@ tap_dance_action_t tap_dance_actions[] = {
 /*     // ... */
 /* }; */
 
-#define KC_TD_ESC_CAPS TD(TD_ESC_CAPS)
+#define KC_TD_ESC_BSPC  TD(TD_ESC_BSPC)
 #define KC_TD_LSFT_CAPS TD(TD_LSFT_CAPS)
 #define KC_TD_RSFT_CAPS TD(TD_RSFT_CAPS)
 #else
-#define KC_TD_ESC_CAPS KC_NO
+#define KC_TD_ESC_BSPC  KC_ESC
 #define KC_TD_LSFT_CAPS KC_LSFT
 #define KC_TD_RSFT_CAPS KC_RSFT
 #endif // TAP_DANCE_ENABLE
@@ -118,27 +118,27 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_QWERTY] = LAYOUT_split_3x6_3(
-    //,-----------------------------------------------------.                        ,-----------------------------------------------------.
-         KC_ESC,    KC_Q,  KC_W,    KC_E,    KC_R,     KC_T,                         KC_Y,   KC_U,    KC_I,    KC_O,    KC_P,   KC_BSPC,
-	//|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-	KC_TAB,     KC_A,    KC_S,   KC_D,     KC_F,     KC_G,                         KC_H,  KC_J,     KC_K,    KC_L,    KC_SCLN, KC_QUOT,
-	//|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-KC_TD_LSFT_CAPS,    KC_Z,    KC_X,    KC_C,    KC_V,     KC_B,                         KC_N,   KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_TD_RSFT_CAPS,
-	//|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                    KC_LCTL, LT(_LOWER, KC_ENT),  KC_SPC,     KC_ENT, FN_MO23, KC_RALT
-	//                         `-------------------------------------'   `------------------------'
+// ,-----------------------------------------------------------------------.       ,-----------------------------------------------------------------------.
+KC_TD_ESC_BSPC,   KC_Q,       KC_W,       KC_E,       KC_R,       KC_T,               KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       KC_BSPC,
+// |-----------+-----------+-----------+-----------+-----------+-----------|       |-----------+-----------+-----------+-----------+-----------+-----------|
+      KC_TAB,     KC_A,       KC_S,       KC_D,       KC_F,       KC_G,               KC_H,       KC_J,       KC_K,       KC_L,       KC_SCLN,    KC_QUOT,
+// |-----------+-----------+-----------+-----------+-----------+-----------|       |-----------+-----------+-----------+-----------+-----------+-----------|
+KC_TD_LSFT_CAPS,  KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,               KC_N,       KC_M,     KC_COMM,      KC_DOT,     KC_SLSH, KC_TD_RSFT_CAPS,
+// `-----------+-----------+-----------+--+--------+--+--------+--+--------+--. .-----------+--+--------+--+--------+--+-----------+-----------+-----------'
+                                            KC_LCTL, LT(_LOWER, KC_ENT),KC_SPC,    KC_ENT,    FN_MO23,     KC_RALT
+//                                        `-----------+-----------+-----------' `-----------+-----------+-----------'
     ),
 
     [_COLEMAK] = LAYOUT(
-    //,-----------------------------------------------------.                        ,-----------------------------------------------------.
-         KC_ESC,    KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,                         KC_J,    KC_L,    KC_U,    KC_Y, KC_SCLN, KC_BSPC,
-    //|--------+--------+--------+--------+--------+--------|                        |--------+--------+--------+--------+--------+--------|
-        KC_TAB,     KC_A,    KC_R,    KC_S,    KC_T,    KC_D,                         KC_H,    KC_N,    KC_E,    KC_I,    KC_O, KC_QUOT,
-    //|--------+--------+--------+--------+--------+--------|                        |--------+--------+--------+--------+--------+--------|
-KC_TD_LSFT_CAPS,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_K,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,    KC_TD_RSFT_CAPS,
-    //|--------+--------+--------+--------+--------+--------|                        |--------+--------+--------+--------+--------+--------|
-                                      KC_LCTL, LT(_LOWER, KC_ENT), KC_SPC,        KC_ENT, FN_MO23, KC_RALT
-    //                                `-----------------------------------'       `--------------------------'
+// ,-----------------------------------------------------------------------.       ,-----------------------------------------------------------------------.
+KC_TD_ESC_BSPC,   KC_Q,       KC_W,       KC_F,    KC_P,    KC_G,                      KC_J,      KC_L,       KC_U,       KC_Y,       KC_SCLN,    KC_BSPC,
+// |-----------+-----------+-----------+-----------+-----------+-----------|       |-----------+-----------+-----------+-----------+-----------+-----------|
+      KC_TAB,     KC_A,       KC_R,       KC_S,    KC_T,    KC_D,                      KC_H,      KC_N,       KC_E,       KC_I,       KC_O,       KC_QUOT,
+// |-----------+-----------+-----------+-----------+-----------+-----------|       |-----------+-----------+-----------+-----------+-----------+-----------|
+KC_TD_LSFT_CAPS,  KC_Z,       KC_X,       KC_C,    KC_V,    KC_B,                      KC_K,      KC_M,  KC_COMM,         KC_DOT,     KC_SLSH, KC_TD_RSFT_CAPS,
+// `-----------+-----------+-----------+--+--------+--+--------+--+--------+--. .-----------+--+--------+--+--------+--+-----------+-----------+-----------'
+                                          KC_LCTL,LT(_LOWER, KC_ENT),KC_SPC,       KC_ENT,    FN_MO23,     KC_RALT
+//                                        `-----------+-----------+-----------' `-----------+-----------+-----------'
     ),
 
     [_LOWER] = LAYOUT_split_3x6_3(
@@ -169,11 +169,11 @@ KC_TD_LSFT_CAPS,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                   
 
     [_ADJUST] = LAYOUT_split_3x6_3(
 // ,-----------------------------------------------------------------------.       ,-----------------------------------------------------------------------.
-QK_HAPTIC_RESET,QK_MACRO_3, QK_MACRO_4, QK_MACRO_5, QK_MACRO_6, QK_MACRO_7,        KC_NUM_LOCK, KC_PSCR,  KC_SCROLL_LOCK, KC_PAUS,    KC_BRIU,   KC_BRID,
+QK_HAPTIC_RESET,QK_MACRO_3, QK_MACRO_4, QK_MACRO_5,  KC_LSFT,    KC_BTN1,           KC_NUM_LOCK, KC_PSCR, KC_SCROLL_LOCK, KC_PAUS,    KC_BRIU,   KC_BRID,
 // |-----------+-----------+-----------+-----------+-----------+-----------|       |-----------+-----------+-----------+-----------+-----------+-----------|
-      RGB_TOG,   RGB_HUI,    RGB_SAI,    RGB_VAI,    RGB_SPI,    KC_VOLU,           QK_MACRO_9, QK_MACRO_10,QK_MACRO_11,QK_MACRO_12,QK_MACRO_13,QK_MACRO_14,
+      RGB_TOG,   RGB_HUI,    RGB_SAI,    RGB_VAI,    RGB_SPI,    KC_VOLU,           QK_MACRO_9, QK_MACRO_10,QK_MACRO_11,QK_MACRO_12,  KC_NO,     KC_MS_U,
 // |-----------+-----------+-----------+-----------+-----------+-----------|       |-----------+-----------+-----------+-----------+-----------+-----------|
-      RGB_MOD,   RGB_HUD,    RGB_SAD,    RGB_VAD,    RGB_SPD,    KC_VOLD,            KC_RGUI,     KC_NO,     KC_NO,       KC_NO,     KC_NO ,    QK_MACRO_15,
+      RGB_MOD,   RGB_HUD,    RGB_SAD,    RGB_VAD,    RGB_SPD,    KC_VOLD,            KC_RGUI,    KC_MS_L,    KC_MS_R,     KC_NO,      KC_NO,     KC_MS_D,
 // `-----------+-----------+-----------+--+--------+--+--------+--+--------+--. .-----------+--+--------+--+--------+--+-----------+-----------+-----------'
                                              KC_LCTL,   KC_TRNS,    KC_SPC,        KC_ENT,    KC_TRNS,    KC_RALT
 //                                        `-----------+-----------+-----------' `-----------+-----------+-----------'
@@ -552,7 +552,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   case QK_MACRO_15:
       if (record->event.pressed) {
 	  // when keycode QK_MACRO_15 is pressed
-	  SEND_STRING("#Macro 15: QMK Firmware 0.20.0");
+	  SEND_STRING("#Macro 15: QMK Firmware 0.20.0_a");
       } else {
 	  // when keycode MACRO0 is released
       }
