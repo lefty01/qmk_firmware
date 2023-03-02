@@ -173,7 +173,7 @@ QK_HAPTIC_RESET,QK_MACRO_3, QK_MACRO_4, QK_MACRO_5, QK_MACRO_6, QK_MACRO_7,     
 // |-----------+-----------+-----------+-----------+-----------+-----------|       |-----------+-----------+-----------+-----------+-----------+-----------|
       RGB_TOG,   RGB_HUI,    RGB_SAI,    RGB_VAI,    RGB_SPI,    KC_VOLU,           QK_MACRO_9, QK_MACRO_10,QK_MACRO_11,QK_MACRO_12,QK_MACRO_13,QK_MACRO_14,
 // |-----------+-----------+-----------+-----------+-----------+-----------|       |-----------+-----------+-----------+-----------+-----------+-----------|
-      RGB_MOD,   RGB_HUD,    RGB_SAD,    RGB_VAD,    RGB_SPD,    KC_VOLD,            KC_RGUI,  ,  KC_NO,     KC_NO,       KC_NO,     KC_NO ,    QK_MACRO_15,
+      RGB_MOD,   RGB_HUD,    RGB_SAD,    RGB_VAD,    RGB_SPD,    KC_VOLD,            KC_RGUI,     KC_NO,     KC_NO,       KC_NO,     KC_NO ,    QK_MACRO_15,
 // `-----------+-----------+-----------+--+--------+--+--------+--+--------+--. .-----------+--+--------+--+--------+--+-----------+-----------+-----------'
                                              KC_LCTL,   KC_TRNS,    KC_SPC,        KC_ENT,    KC_TRNS,    KC_RALT
 //                                        `-----------+-----------+-----------' `-----------+-----------+-----------'
