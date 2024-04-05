@@ -97,9 +97,9 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     case LALT_T(KC_F):
     case RALT_T(KC_J):
     case RCTL_T(KC_K):
-	return TAPPING_TERM + 250;
+        return TAPPING_TERM + 250;
     default:
-	return TAPPING_TERM;
+        return TAPPING_TERM;
     }
 }
 
@@ -169,11 +169,11 @@ KC_TD_LSFT_CAPS,  KC_Z,       KC_X,       KC_C,    KC_V,    KC_B,               
 
     [_ADJUST] = LAYOUT_split_3x6_3(
 // ,-----------------------------------------------------------------------.       ,-----------------------------------------------------------------------.
-QK_HAPTIC_RESET,QK_MACRO_3, QK_MACRO_4, QK_MACRO_5,  KC_LSFT,    KC_BTN1,           KC_NUM_LOCK, KC_PSCR, KC_SCROLL_LOCK, KC_PAUS,    KC_BRIU,   KC_BRID,
+QK_HAPTIC_RESET,QK_MACRO_3, QK_MACRO_4, QK_MACRO_5,  KC_LSFT,    KC_BTN2,           KC_NUM_LOCK, KC_PSCR, KC_SCROLL_LOCK, KC_PAUS,    KC_BRIU,   KC_BRID,
 // |-----------+-----------+-----------+-----------+-----------+-----------|       |-----------+-----------+-----------+-----------+-----------+-----------|
-      RGB_TOG,   RGB_HUI,    RGB_SAI,    RGB_VAI,    RGB_SPI,    KC_VOLU,           QK_MACRO_9, QK_MACRO_10,QK_MACRO_11,QK_MACRO_12,  KC_NO,     KC_MS_U,
+      RGB_TOG,   RGB_HUI,    RGB_SAI,    RGB_VAI,    RGB_SPI,    KC_VOLU,           QK_MACRO_9, QK_MACRO_10, KC_MS_U,   QK_MACRO_11,QK_MACRO_12,  KC_NO,
 // |-----------+-----------+-----------+-----------+-----------+-----------|       |-----------+-----------+-----------+-----------+-----------+-----------|
-      RGB_MOD,   RGB_HUD,    RGB_SAD,    RGB_VAD,    RGB_SPD,    KC_VOLD,            KC_RGUI,    KC_MS_L,    KC_MS_R,     KC_NO,      KC_NO,     KC_MS_D,
+      RGB_MOD,   RGB_HUD,    RGB_SAD,    RGB_VAD,    RGB_SPD,    KC_VOLD,            KC_RGUI,    KC_MS_L,    KC_MS_D,     KC_MS_R,  KC_BTN1,      KC_BTN2,
 // `-----------+-----------+-----------+--+--------+--+--------+--+--------+--. .-----------+--+--------+--+--------+--+-----------+-----------+-----------'
                                              KC_LCTL,   KC_TRNS,    KC_SPC,        KC_ENT,    KC_TRNS,    KC_RALT
 //                                        `-----------+-----------+-----------' `-----------+-----------+-----------'
@@ -225,68 +225,68 @@ combo_t key_combos[] = {
 void process_combo_event(uint16_t combo_index, bool pressed) {
     switch(combo_index) {
     case ROUND_BRC:
-	if (pressed) {
-	    tap_code16(S(KC_9));
-	    tap_code16(S(KC_0));
-	    tap_code16(KC_LEFT);
-	}
-	break;
+        if (pressed) {
+            tap_code16(S(KC_9));
+            tap_code16(S(KC_0));
+            tap_code16(KC_LEFT);
+        }
+        break;
     case CURLY_BRC:
-	if (pressed) {
-	    tap_code16(S(KC_LBRC));
-	    tap_code16(S(KC_RBRC));
-	    tap_code16(KC_LEFT);
-	}
-	break;
+        if (pressed) {
+            tap_code16(S(KC_LBRC));
+            tap_code16(S(KC_RBRC));
+            tap_code16(KC_LEFT);
+        }
+        break;
     case SQUARE_BRC:
-	if (pressed) {
-	    tap_code16(KC_LBRC);
-	    tap_code16(KC_RBRC);
-	    tap_code16(KC_LEFT);
-	}
-	break;
+        if (pressed) {
+            tap_code16(KC_LBRC);
+            tap_code16(KC_RBRC);
+            tap_code16(KC_LEFT);
+        }
+        break;
     case ANGLE_BRC:
-	if (pressed) {
-	    tap_code16(S(KC_COMM));
-	    tap_code16(S(KC_DOT));
-	    tap_code16(KC_LEFT);
-	}
-	break;
+        if (pressed) {
+            tap_code16(S(KC_COMM));
+            tap_code16(S(KC_DOT));
+            tap_code16(KC_LEFT);
+        }
+        break;
     case SINGLE_QUOTE:
-	if (pressed) {
-	    tap_code16(KC_QUOT);
-	    tap_code16(KC_QUOT);
-	    tap_code16(KC_LEFT);
-	}
-	break;
+        if (pressed) {
+            tap_code16(KC_QUOT);
+            tap_code16(KC_QUOT);
+            tap_code16(KC_LEFT);
+        }
+        break;
     case DOUBLE_QUOTE:
-	if (pressed) {
-	    tap_code16(S(KC_QUOT));
-	    tap_code16(S(KC_QUOT));
-	    tap_code16(KC_LEFT);
-	}
-	break;
+        if (pressed) {
+            tap_code16(S(KC_QUOT));
+            tap_code16(S(KC_QUOT));
+            tap_code16(KC_LEFT);
+        }
+        break;
     case A_UML:
-	if (pressed) {
-	    tap_code16(KC_RGUI);
-	    tap_code16(S(KC_QUOT));
-	    tap_code16(KC_A);
-	}
-	break;
+        if (pressed) {
+            tap_code16(KC_RGUI);
+            tap_code16(S(KC_QUOT));
+            tap_code16(KC_A);
+        }
+        break;
     case O_UML:
-	if (pressed) {
-	    tap_code16(KC_RGUI);
-	    tap_code16(S(KC_QUOT));
-	    tap_code16(KC_O);
-	}
-	break;
+        if (pressed) {
+            tap_code16(KC_RGUI);
+            tap_code16(S(KC_QUOT));
+            tap_code16(KC_O);
+        }
+        break;
     case U_UML:
-	if (pressed) {
-	    tap_code16(KC_RGUI);
-	    tap_code16(S(KC_QUOT));
-	    tap_code16(KC_U);
-	}
-	break;
+        if (pressed) {
+            tap_code16(KC_RGUI);
+            tap_code16(S(KC_QUOT));
+            tap_code16(KC_U);
+        }
+        break;
     }
 }
 #endif  // COMBO_ENABLE
@@ -311,20 +311,20 @@ void oled_render_layer_state(void) {
     oled_write_P(PSTR("Layer: "), false);
     switch (layer_state) {
     case L_BASE:
-	oled_write_ln_P(PSTR("Default"), false);
-	break;
+        oled_write_ln_P(PSTR("Default"), false);
+        break;
     case L_LOWER:
-	oled_write_ln_P(PSTR("Lower"), false);
-	break;
+        oled_write_ln_P(PSTR("Lower"), false);
+        break;
     case L_RAISE:
-	oled_write_ln_P(PSTR("Raise"), false);
-	break;
+        oled_write_ln_P(PSTR("Raise"), false);
+        break;
     case L_ADJUST:
     case L_ADJUST|L_LOWER:
     case L_ADJUST|L_RAISE:
     case L_ADJUST|L_LOWER|L_RAISE:
-	oled_write_ln_P(PSTR("Adjust"), false);
-	break;
+        oled_write_ln_P(PSTR("Adjust"), false);
+        break;
     }
 }
 
@@ -349,8 +349,8 @@ void set_keylog(uint16_t keycode, keyrecord_t *record) {
 
   // update keylog
   snprintf(keylog_str, sizeof(keylog_str), "%dx%d, k%2d : %c",
-	   record->event.key.row, record->event.key.col,
-	   keycode, name);
+           record->event.key.row, record->event.key.col,
+           keycode, name);
 }
 
 void oled_render_keylog(void) {
@@ -360,33 +360,33 @@ void oled_render_keylog(void) {
 void render_bootmagic_status(bool status) {
     /* Show Ctrl-Gui Swap options */
     static const char PROGMEM logo[][2][3] = {
-	{{0x97, 0x98, 0}, {0xb7, 0xb8, 0}},
-	{{0x95, 0x96, 0}, {0xb5, 0xb6, 0}},
+        {{0x97, 0x98, 0}, {0xb7, 0xb8, 0}},
+        {{0x95, 0x96, 0}, {0xb5, 0xb6, 0}},
     };
     if (status) {
-	oled_write_ln_P(logo[0][0], false);
-	oled_write_ln_P(logo[0][1], false);
+        oled_write_ln_P(logo[0][0], false);
+        oled_write_ln_P(logo[0][1], false);
     } else {
-	oled_write_ln_P(logo[1][0], false);
-	oled_write_ln_P(logo[1][1], false);
+        oled_write_ln_P(logo[1][0], false);
+        oled_write_ln_P(logo[1][1], false);
     }
 }
 
 void oled_render_logo(void) {
     static const char PROGMEM crkbd_logo[] = {
-	0x80, 0x81, 0x82, 0x83, 0x84, 0x85, 0x86, 0x87, 0x88, 0x89, 0x8a, 0x8b, 0x8c, 0x8d, 0x8e, 0x8f, 0x90, 0x91, 0x92, 0x93, 0x94,
-	0xa0, 0xa1, 0xa2, 0xa3, 0xa4, 0xa5, 0xa6, 0xa7, 0xa8, 0xa9, 0xaa, 0xab, 0xac, 0xad, 0xae, 0xaf, 0xb0, 0xb1, 0xb2, 0xb3, 0xb4,
-	0xc0, 0xc1, 0xc2, 0xc3, 0xc4, 0xc5, 0xc6, 0xc7, 0xc8, 0xc9, 0xca, 0xcb, 0xcc, 0xcd, 0xce, 0xcf, 0xd0, 0xd1, 0xd2, 0xd3, 0xd4,
-	0};
+        0x80, 0x81, 0x82, 0x83, 0x84, 0x85, 0x86, 0x87, 0x88, 0x89, 0x8a, 0x8b, 0x8c, 0x8d, 0x8e, 0x8f, 0x90, 0x91, 0x92, 0x93, 0x94,
+        0xa0, 0xa1, 0xa2, 0xa3, 0xa4, 0xa5, 0xa6, 0xa7, 0xa8, 0xa9, 0xaa, 0xab, 0xac, 0xad, 0xae, 0xaf, 0xb0, 0xb1, 0xb2, 0xb3, 0xb4,
+        0xc0, 0xc1, 0xc2, 0xc3, 0xc4, 0xc5, 0xc6, 0xc7, 0xc8, 0xc9, 0xca, 0xcb, 0xcc, 0xcd, 0xce, 0xcf, 0xd0, 0xd1, 0xd2, 0xd3, 0xd4,
+        0};
     oled_write_P(crkbd_logo, false);
 }
 
 bool oled_task_user(void) {
     if (is_keyboard_master()) {
-	oled_render_layer_state();
-	oled_render_keylog();
+        oled_render_layer_state();
+        oled_render_keylog();
     } else {
-	oled_render_logo();
+        oled_render_logo();
     }
     return false;
 }
@@ -401,38 +401,38 @@ extern led_config_t g_led_config;
 void rgb_matrix_layer_helper(uint8_t hue, uint8_t sat, uint8_t val, uint8_t led_type) {
     HSV hsv = {hue, sat, val};
     if (hsv.v > rgb_matrix_config.hsv.v) {
-	hsv.v = rgb_matrix_config.hsv.v;
+        hsv.v = rgb_matrix_config.hsv.v;
     }
 
     RGB rgb = hsv_to_rgb(hsv);
     for (uint8_t i = 0; i < RGB_MATRIX_LED_COUNT; i++) {
-	if (HAS_FLAGS(g_led_config.flags[i], led_type)) {
-	    rgb_matrix_set_color(i, rgb.r, rgb.g, rgb.b);
-	}
+        if (HAS_FLAGS(g_led_config.flags[i], led_type)) {
+            rgb_matrix_set_color(i, rgb.r, rgb.g, rgb.b);
+        }
     }
 }
 
 bool rgb_matrix_indicators_user(void) {
     if (host_keyboard_led_state().caps_lock) {
-	rgb_matrix_set_color(26, 255, 0, 0);
-	// Only works with SPLIT_LED_STATE_ENABLE
-	rgb_matrix_set_color(53, 255, 0, 0);
+        rgb_matrix_set_color(26, 255, 0, 0);
+        // Only works with SPLIT_LED_STATE_ENABLE
+        rgb_matrix_set_color(53, 255, 0, 0);
     }
 
     switch (get_highest_layer(layer_state)) {
     case _LOWER:
-	rgb_matrix_layer_helper(HSV_PURPLE, LED_FLAG_UNDERGLOW);
-	break;
+        rgb_matrix_layer_helper(HSV_PURPLE, LED_FLAG_UNDERGLOW);
+        break;
     case _RAISE:
-	rgb_matrix_layer_helper(HSV_GOLDENROD, LED_FLAG_UNDERGLOW);
-	break;
+        rgb_matrix_layer_helper(HSV_GOLDENROD, LED_FLAG_UNDERGLOW);
+        break;
     case _ADJUST:
-	rgb_matrix_layer_helper(HSV_GREEN, LED_FLAG_UNDERGLOW);
-	break;
+        rgb_matrix_layer_helper(HSV_GREEN, LED_FLAG_UNDERGLOW);
+        break;
     default: {
-	// fixme: handle additional base layer e.g. if we toggle between qwert and colemak
-	rgb_matrix_layer_helper(THEME_HSV, LED_FLAG_UNDERGLOW);
-	break;
+        // fixme: handle additional base layer e.g. if we toggle between qwert and colemak
+        rgb_matrix_layer_helper(THEME_HSV, LED_FLAG_UNDERGLOW);
+        break;
     }
     }
     return false;
@@ -444,122 +444,122 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 #ifdef OLED_ENABLE
     if (record->event.pressed) {
-	set_keylog(keycode, record);
+        set_keylog(keycode, record);
     }
 #endif
 
-  switch (keycode) {
-  case FN_MO13:
-      if (record->event.pressed) {
-	  layer_on(_LOWER);
-	  update_tri_layer(_LOWER, _RAISE, _ADJUST);
-      } else {
-	  layer_off(_LOWER);
-	  update_tri_layer(_LOWER, _RAISE, _ADJUST);
-      }
-      return false;
-      break;
-  case FN_MO23:
-      if (record->event.pressed) {
-	  layer_on(_RAISE);
-	  update_tri_layer(_LOWER, _RAISE, _ADJUST);
-      } else {
-	  layer_off(_RAISE);
-	  update_tri_layer(_LOWER, _RAISE, _ADJUST);
-      }
-      return false;
-      break;
-  case FN_LT13ENT:
-      // like fn_mo13 but use layer tap to get enter when tapped
-      break;
+    switch (keycode) {
+    case FN_MO13:
+        if (record->event.pressed) {
+            layer_on(_LOWER);
+            update_tri_layer(_LOWER, _RAISE, _ADJUST);
+        } else {
+            layer_off(_LOWER);
+            update_tri_layer(_LOWER, _RAISE, _ADJUST);
+        }
+        return false;
+        break;
+    case FN_MO23:
+        if (record->event.pressed) {
+            layer_on(_RAISE);
+            update_tri_layer(_LOWER, _RAISE, _ADJUST);
+        } else {
+            layer_off(_RAISE);
+            update_tri_layer(_LOWER, _RAISE, _ADJUST);
+        }
+        return false;
+        break;
+    case FN_LT13ENT:
+        // like fn_mo13 but use layer tap to get enter when tapped
+        break;
 
-  // process macros
-  case QK_MACRO_0:
-      if (record->event.pressed) {
-	  SEND_STRING(SS_LALT("x") "set-variable" SS_TAP(X_ENT) "c-basic-offset" SS_TAP(X_ENT) "2");
-      }
-      break;
-  case QK_MACRO_1:
-      if (record->event.pressed) {
-	  SEND_STRING("emacs *.trace.gz &" SS_TAP(X_ENT));
-      }
-      break;
-  case QK_MACRO_2:
-      if (record->event.pressed) {
-	  SEND_STRING(SS_TAP(X_ESC) ":wq" SS_TAP(X_ENT));
-      }
-      break;
-  case QK_MACRO_3:
-      if (record->event.pressed) {
-	  SEND_STRING(SS_LCTL("c") "r");
-      }
-      break;
-  case QK_MACRO_4:
-      if (record->event.pressed) {
-	  SEND_STRING(SS_RALT("x") "find-grep-dired" SS_TAP(X_ENT));
-      }
-      break;
-  case QK_MACRO_5:
-      if (record->event.pressed) {
-	  SEND_STRING(SS_RALT("x") "comment-region" SS_TAP(X_ENT));
-      }
-      break;
-  case QK_MACRO_6:
-      if (record->event.pressed) {
-	  SEND_STRING("Macro 06 Key was pressed!");
-      }
-      break;
-  case QK_MACRO_7:
-      if (record->event.pressed) {
-	  SEND_STRING("Macro 07 Key was pressed!");
-      }
-      break;
-  case QK_MACRO_8:
-      if (record->event.pressed) {
-	  SEND_STRING("Macro 08 Key was pressed!");
-      }
-      break;
-  case QK_MACRO_9: // ctrl-space + end: mark from cursor to end of line in emacs
-      if (record->event.pressed) {
-	  SEND_STRING(SS_LCTL(" ") SS_TAP(X_END));
-      }
-      break;
-  case QK_MACRO_10:
-      if (record->event.pressed) {
-	  SEND_STRING(SS_LCTL("x") "rt");
-      }
-      break;
-  case QK_MACRO_11:
-      if (record->event.pressed) {
-	  SEND_STRING(SS_LCTL("x") "rk");
-      }
-      break;
-  case QK_MACRO_12:
-      if (record->event.pressed) {
-	  SEND_STRING(SS_LCTL("x") "ry");
-      }
-      break;
-  case QK_MACRO_13:
-      if (record->event.pressed) {
-	  SEND_STRING("Macro 13 Key was pressed!");
-      }
-      break;
-  case QK_MACRO_14:
-      if (record->event.pressed) {
-	  SEND_STRING("Macro 14 Key was pressed!");
-      }
-      break;
-  case QK_MACRO_15:
-      if (record->event.pressed) {
-	  // when keycode QK_MACRO_15 is pressed
-	  SEND_STRING("#Macro 15: QMK Firmware 0.20.0_a");
-      } else {
-	  // when keycode MACRO0 is released
-      }
-      break;
-  }  // switch keycode
+        // process macros
+    case QK_MACRO_0:
+        if (record->event.pressed) {
+            SEND_STRING(SS_LALT("x") "set-variable" SS_TAP(X_ENT) "c-basic-offset" SS_TAP(X_ENT) "2");
+        }
+        break;
+    case QK_MACRO_1:
+        if (record->event.pressed) {
+            SEND_STRING("emacs *.trace.gz &" SS_TAP(X_ENT));
+        }
+        break;
+    case QK_MACRO_2:
+        if (record->event.pressed) {
+            SEND_STRING(SS_TAP(X_ESC) ":wq" SS_TAP(X_ENT));
+        }
+        break;
+    case QK_MACRO_3:
+        if (record->event.pressed) {
+            SEND_STRING(SS_LCTL("c") "r");
+        }
+        break;
+    case QK_MACRO_4:
+        if (record->event.pressed) {
+            SEND_STRING(SS_RALT("x") "find-grep-dired" SS_TAP(X_ENT));
+        }
+        break;
+    case QK_MACRO_5:
+        if (record->event.pressed) {
+            SEND_STRING(SS_RALT("x") "comment-region" SS_TAP(X_ENT));
+        }
+        break;
+    case QK_MACRO_6:
+        if (record->event.pressed) {
+            SEND_STRING("Macro 06 Key was pressed!");
+        }
+        break;
+    case QK_MACRO_7:
+        if (record->event.pressed) {
+            SEND_STRING("Macro 07 Key was pressed!");
+        }
+        break;
+    case QK_MACRO_8:
+        if (record->event.pressed) {
+            SEND_STRING("Macro 08 Key was pressed!");
+        }
+        break;
+    case QK_MACRO_9: // ctrl-space + end: mark from cursor to end of line in emacs
+        if (record->event.pressed) {
+            SEND_STRING(SS_LCTL(" ") SS_TAP(X_END));
+        }
+        break;
+    case QK_MACRO_10:
+        if (record->event.pressed) {
+            SEND_STRING(SS_LCTL("x") "rt");
+        }
+        break;
+    case QK_MACRO_11:
+        if (record->event.pressed) {
+            SEND_STRING(SS_LCTL("x") "rk");
+        }
+        break;
+    case QK_MACRO_12:
+        if (record->event.pressed) {
+            SEND_STRING(SS_LCTL("x") "ry");
+        }
+        break;
+    case QK_MACRO_13:
+        if (record->event.pressed) {
+            SEND_STRING("Macro 13 Key was pressed!");
+        }
+        break;
+    case QK_MACRO_14:
+        if (record->event.pressed) {
+            SEND_STRING("Macro 14 Key was pressed!");
+        }
+        break;
+    case QK_MACRO_15:
+        if (record->event.pressed) {
+            // when keycode QK_MACRO_15 is pressed
+            SEND_STRING("#Macro 15: QMK Firmware 0.20.5_lefty01");
+        } else {
+            // when keycode MACRO0 is released
+        }
+        break;
+    }  // switch keycode
 
-  return true;
+    return true;
 }  // process_record_user()
 
 
