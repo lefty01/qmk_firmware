@@ -78,7 +78,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #    undef ENABLE_RGB_MATRIX_BAND_SPIRAL_VAL
 #    undef ENABLE_RGB_MATRIX_BAND_VAL
 #    undef ENABLE_RGB_MATRIX_CYCLE_ALL
-//#define ENABLE_RGB_MATRIX_CYCLE_ALL
+#define ENABLE_RGB_MATRIX_CYCLE_ALL
 #    undef ENABLE_RGB_MATRIX_CYCLE_LEFT_RIGHT
 #    undef ENABLE_RGB_MATRIX_CYCLE_OUT_IN
 #    undef ENABLE_RGB_MATRIX_CYCLE_OUT_IN_DUAL

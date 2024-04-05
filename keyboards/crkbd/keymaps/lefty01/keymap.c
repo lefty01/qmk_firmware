@@ -169,11 +169,11 @@ KC_TD_LSFT_CAPS,  KC_Z,       KC_X,       KC_C,    KC_V,    KC_B,               
 
     [_ADJUST] = LAYOUT_split_3x6_3(
 // ,-----------------------------------------------------------------------.       ,-----------------------------------------------------------------------.
-QK_HAPTIC_RESET,QK_MACRO_3, QK_MACRO_4, QK_MACRO_5,  KC_LSFT,    KC_BTN2,           KC_NUM_LOCK, KC_PSCR, KC_SCROLL_LOCK, KC_PAUS,    KC_BRIU,   KC_BRID,
+QK_HAPTIC_RESET,QK_MACRO_3,  KC_BTN1,    KC_LSFT,    KC_BTN2,    KC_BTN3,           KC_NUM_LOCK, KC_PSCR,    KC_MS_U,    KC_PAUS,    KC_BRIU,   KC_BRID,
 // |-----------+-----------+-----------+-----------+-----------+-----------|       |-----------+-----------+-----------+-----------+-----------+-----------|
-      RGB_TOG,   RGB_HUI,    RGB_SAI,    RGB_VAI,    RGB_SPI,    KC_VOLU,           QK_MACRO_9, QK_MACRO_10, KC_MS_U,   QK_MACRO_11,QK_MACRO_12,  KC_NO,
+      RGB_TOG,   RGB_HUI,    RGB_SAI,    RGB_VAI,    RGB_SPI,    KC_VOLU,           QK_MACRO_9,  KC_MS_L,    KC_MS_D,    KC_MS_R,    QK_MACRO_12, KC_SCROLL_LOCK,
 // |-----------+-----------+-----------+-----------+-----------+-----------|       |-----------+-----------+-----------+-----------+-----------+-----------|
-      RGB_MOD,   RGB_HUD,    RGB_SAD,    RGB_VAD,    RGB_SPD,    KC_VOLD,            KC_RGUI,    KC_MS_L,    KC_MS_D,     KC_MS_R,  KC_BTN1,      KC_BTN2,
+      RGB_MOD,   RGB_HUD,    RGB_SAD,    RGB_VAD,    RGB_SPD,    KC_VOLD,            KC_RGUI,   QK_MACRO_10,QK_MACRO_11,QK_MACRO_12, QK_MACRO_4, QK_MACRO_5,
 // `-----------+-----------+-----------+--+--------+--+--------+--+--------+--. .-----------+--+--------+--+--------+--+-----------+-----------+-----------'
                                              KC_LCTL,   KC_TRNS,    KC_SPC,        KC_ENT,    KC_TRNS,    KC_RALT
 //                                        `-----------+-----------+-----------' `-----------+-----------+-----------'
@@ -524,17 +524,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             SEND_STRING(SS_LCTL(" ") SS_TAP(X_END));
         }
         break;
-    case QK_MACRO_10:
+    case QK_MACRO_10: // emacs rectangular replace
         if (record->event.pressed) {
             SEND_STRING(SS_LCTL("x") "rt");
         }
         break;
-    case QK_MACRO_11:
+    case QK_MACRO_11: // emacs rectangular cut
         if (record->event.pressed) {
             SEND_STRING(SS_LCTL("x") "rk");
         }
         break;
-    case QK_MACRO_12:
+    case QK_MACRO_12: // emacs rectangular yank (paste)
         if (record->event.pressed) {
             SEND_STRING(SS_LCTL("x") "ry");
         }
