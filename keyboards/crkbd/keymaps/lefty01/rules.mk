@@ -7,12 +7,12 @@ COMBO_ENABLE  = yes
 
 BACKLIGHT_ENABLE  = no       # Enable keyboard backlight functionality
 RGBLIGHT_ENABLE   = no       # Enable keyboard RGB underglow
-RGB_MATRIX_DRIVER = WS2812
+RGB_MATRIX_DRIVER = ws2812
 RGB_MATRIX_ENABLE = yes
 RGB_MATRIX_CUSTOM_USER = yes
 
 OLED_ENABLE     = no # yes
-OLED_DRIVER     = SSD1306
+OLED_DRIVER     = ssd1306
 
 LTO_ENABLE = yes
 MOUSEKEY_ENABLE = yes
